@@ -46,15 +46,15 @@
 (defn mk-topology []
 
   (topology
-   {"1" (spout-spec sentence-spout)
-    "2" (spout-spec (sentence-spout-parameterized
-                     ["the cat jumped over the door"
-                      "greetings from a faraway land"])
-                     :p 2)}
-   {"3" (bolt-spec {"1" :shuffle "2" :shuffle}
+   {"data-random-en" (spout-spec sentence-spout)
+    "data-random-cn" (spout-spec (sentence-spout-parameterized
+                                       ["xin nian kuai le"
+                                        "gong xi fa cai"])
+                                     :p 2)}
+   {"proc-split" (bolt-spec {"data-random-en" :shuffle "data-random-cn" :shuffle}
                    split-sentence
                    :p 5)
-    "4" (bolt-spec {"3" ["word"]}
+    "proc-count" (bolt-spec {"proc-split" ["word"]}
                    word-count
                    :p 6)}))
 
@@ -66,7 +66,7 @@
     ))
 
 (defn submit-topology! [name]
-  (System/setProperty "storm.jar" "~/.m2/repository/storm/storm/0.8.2/storm-0.8.2.jar")
+  (System/setProperty "storm.jar" (.. (Class/forName "backtype.storm.StormSubmitter") getProtectionDomain getCodeSource getLocation getPath))
   (StormSubmitter/submitTopology
    name
    {TOPOLOGY-DEBUG true
