@@ -1,13 +1,10 @@
 # storm-starter-minimum
 
-A Clojure library designed to ... well, that part is up to you.
+A minimal set of codes modified from storm-starter. Can be used as the starting point skeleton.
 
 ## Usage
 
-FIXME
+See [blog post](http://eri2.com/blog/2013/09/07/storm-starter-minimum/).
 
 ## License
-
-Copyright © 2013 FIXME
-
-Distributed under the Eclipse Public License, the same as Clojure.
+Public Domain.
