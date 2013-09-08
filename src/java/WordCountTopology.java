@@ -35,7 +35,7 @@ public class WordCountTopology {
 
     if (args != null && args.length > 0) {
       conf.setNumWorkers(3);
-      System.setProperty("storm.jar", Class.forName("backtype.storm.StormSubmitter").getProtectionDomain().getCodeSource().getLocation().getPath());
+      System.setProperty("storm.jar", Class.forName("WordCountTopology").getProtectionDomain().getCodeSource().getLocation().getPath());
       StormSubmitter.submitTopology(args[0], conf, builder.createTopology());
     }
     else {

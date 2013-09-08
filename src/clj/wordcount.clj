@@ -1,4 +1,4 @@
-(ns word-count
+(ns wordcount
   (:import [backtype.storm StormSubmitter LocalCluster])
   (:use [backtype.storm clojure config])
   (:gen-class))
@@ -60,13 +60,14 @@
 
 (defn run-local! []
   (let [cluster (LocalCluster.)]
-    (.submitTopology cluster "word-count" {TOPOLOGY-DEBUG true} (mk-topology))
+    (.submitTopology cluster "wordcount" {TOPOLOGY-DEBUG true} (mk-topology))
     (Thread/sleep 10000)
     (.shutdown cluster)
     ))
 
 (defn submit-topology! [name]
-  (System/setProperty "storm.jar" (.. (Class/forName "backtype.storm.StormSubmitter") getProtectionDomain getCodeSource getLocation getPath))
+  (System/setProperty "storm.jar"  (..  (Class/forName "wordcount") getProtectionDomain getCodeSource getLocation getPath))
+  (println (System/getProperty "storm.jar"))
   (StormSubmitter/submitTopology
    name
    {TOPOLOGY-DEBUG true
